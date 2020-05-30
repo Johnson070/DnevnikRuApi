@@ -1,0 +1,10 @@
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\bin\Debug\ApiDiaryLibrary.dll
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\bin\Debug\ApiDiaryLibrary.pdb
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\bin\Debug\Newtonsoft.Json.dll
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\bin\Debug\RestSharp.dll
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\bin\Debug\Newtonsoft.Json.xml
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\bin\Debug\RestSharp.xml
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\obj\Debug\ApiDiaryLibrary.csproj.CopyComplete
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\obj\Debug\ApiDiaryLibrary.dll
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\obj\Debug\ApiDiaryLibrary.pdb
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\obj\Debug\ApiDiaryLibrary.csprojAssemblyReference.cache

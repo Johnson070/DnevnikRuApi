@@ -1,0 +1,9 @@
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\bin\Release\ApiDiaryLibrary.dll
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\bin\Release\ApiDiaryLibrary.pdb
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\bin\Release\Newtonsoft.Json.dll
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\bin\Release\RestSharp.dll
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\bin\Release\Newtonsoft.Json.xml
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\bin\Release\RestSharp.xml
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\obj\Release\ApiDiaryLibrary.csproj.CopyComplete
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\obj\Release\ApiDiaryLibrary.dll
+C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\obj\Release\ApiDiaryLibrary.pdb
