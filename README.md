@@ -14,7 +14,7 @@ ApiDiary api = new ApiDiary(string login, string pass);
 ```
 или
 ```C#
-ApiDiary api = new ApiDiary(string pass, string login, string client_id, string client_secret, string scope);
+ApiDiary api = new ApiDiary(string login, string pass, string client_id, string client_secret, string scope);
 ```
 
 Позже будет написан мануал по всем методам и функциям!
