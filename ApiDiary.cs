@@ -11,7 +11,15 @@ namespace ApiDiaryLibrary
 {
     public class ApiDiary
     {
-        public ApiDiary(string pass, string login, string client_id, string client_secret, string scope)
+        /// <summary>
+        /// Инициализация ApiDiary
+        /// </summary>
+        /// <param name="login">Логин</param>
+        /// <param name="pass">Пароль</param>
+        /// <param name="client_id">Открытый id</param>
+        /// <param name="client_secret">Секретный id</param>
+        /// <param name="scope">Разрешения</param>
+        public ApiDiary(string login, string pass, string client_id, string client_secret, string scope)
         {
             var client = new RestClient
             {
@@ -32,6 +40,11 @@ namespace ApiDiaryLibrary
             keyAccess = json["accessToken"].Value<string>();
         }
 
+        /// <summary>
+        /// Инициализация ApiDiary
+        /// </summary>
+        /// <param name="login">Логин</param>
+        /// <param name="pass">Пароль</param>
         public ApiDiary(string login, string pass)
         {
             var client = new RestClient
@@ -53,6 +66,11 @@ namespace ApiDiaryLibrary
             keyAccess = json["accessToken"].Value<string>();
         }
 
+
+        /// <summary>
+        /// Инициализация ApiDiary
+        /// </summary>
+        /// <param name="keyAccess">ключ-токен</param>
         public ApiDiary(string keyAccess)
         {
             this.keyAccess = keyAccess;

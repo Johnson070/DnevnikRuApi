@@ -7,4 +7,3 @@ C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\bin\Debug\RestShar
 C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\obj\Debug\ApiDiaryLibrary.csproj.CopyComplete
 C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\obj\Debug\ApiDiaryLibrary.dll
 C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\obj\Debug\ApiDiaryLibrary.pdb
-C:\Users\iWeber\source\repos\WebBrowserParser\ApiDiaryLibrary\obj\Debug\ApiDiaryLibrary.csprojAssemblyReference.cache
