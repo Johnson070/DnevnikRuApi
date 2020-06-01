@@ -170,16 +170,27 @@ namespace ApiDiaryLibrary
             return text;
         }
 
-
+        /// <summary>
+        /// Возращает все школы персоны
+        /// </summary>
+        /// <returns>json с schoolsIds</returns>
         public string GetSchool() => Get(new RestRequest(), "schools/person-schools");
 
-
+        /// <summary>
+        /// Профиль текущего пользователя
+        /// </summary>
+        /// <returns></returns>
         public string GetInfo() => Get(new RestRequest(), "users/me");
 
 
         public string GetClassmates() => Get(new RestRequest(), "users/me/classmates");
 
-
+        /// <summary>
+        /// Получение контекстной информации по пользователю
+        /// </summary>
+        /// <returns>
+        /// json строка с контекстной информацией о пользователе
+        /// </returns>
         public string GetContext() => Get(new RestRequest(), "users/me/context");
 
 
@@ -188,37 +199,78 @@ namespace ApiDiaryLibrary
 
         public string GetOrganizationInfo(long organizationId) => Get(new RestRequest(), $"users/me/organizations/{organizationId}");
 
-
+        /// <summary>
+        /// Получение контекстной информации по пользователю(userId)
+        /// </summary>
+        /// <param name="userId">userId персоны</param>
+        /// <returns></returns>
         public string GetUserContext(long userId) => Get(new RestRequest(), $"users/{userId}/context");
 
-
+        /// <summary>
+        /// Список участий в школах для текущего пользователя
+        /// </summary>
+        /// <param name="userId">userId персоны</param>
+        /// <returns></returns>
         public string GetUserMemberShips(long userId) => Get(new RestRequest(), $"users/{userId}/school-memberships");
 
-
+        /// <summary>
+        /// Список участий в школах для произвольного пользователя
+        /// </summary>
+        /// <param name="userId">userId персоны</param>
+        /// <returns></returns>
         public string GetUserEducation(long userId) => Get(new RestRequest(), $"users/{userId}/education");
 
-
+        /// <summary>
+        /// Список участий в школах для произвольного пользователя
+        /// </summary>
+        /// <param name="personId">personId персоны</param>
+        /// <returns></returns>
         public string GetPersonMemberships(long personId) => Get(new RestRequest(), $"users/{personId}/education");
 
-
+        /// <summary>
+        /// Список идентификаторов(schoolIds) школ текущего пользователя
+        /// </summary>
+        /// <returns></returns>
         public string GetSchools() => Get(new RestRequest(), "users/me/schools");
 
-
+        /// <summary>
+        /// Список идентификаторов(schoolIds) школ произвольного пользователя
+        /// </summary>
+        /// <param name="userId">userId персоны</param>
+        /// <returns></returns>
         public string GetUserSchools(long userId) => Get(new RestRequest(), $"users/{userId}/schools");
 
-
+        /// <summary>
+        /// Список идентификаторов(groupIds) классов текущего пользователя
+        /// </summary>
+        /// <returns></returns>
         public string GetEduGroups() => Get(new RestRequest(), "users/me/edu-groups");
 
-
+        /// <summary>
+        /// Список идентификаторов(groupIds) классов текущего пользователя
+        /// </summary>
+        /// <param name="userId">userId персоны</param>
+        /// <returns></returns>
         public string GetUserEduGroups(long userId) => Get(new RestRequest(), $"users/{userId}/edu-groups");
 
-
+        /// <summary>
+        /// Список участий в школах для текущего пользователя
+        /// </summary>
+        /// <returns></returns>
         public string GetMemberships() => Get(new RestRequest(), "users/me/school-memberships");
 
-
+        /// <summary>
+        /// Класс или учебная группа
+        /// </summary>
+        /// <param name="eduGroupId">eduGroupId или groupId персоны</param>
+        /// <returns></returns>
         public string GetGroupInfo(long eduGroupId) => Get(new RestRequest(), $"edu-groups/{eduGroupId}");
 
-
+        /// <summary>
+        /// Список учебных групп
+        /// </summary>
+        /// <param name="eduGroupsList"></param>
+        /// <returns></returns>
         public string GetGroupsInfo(params long[] eduGroupsList)
         {
             var request = new RestRequest();
@@ -226,16 +278,33 @@ namespace ApiDiaryLibrary
             return Get(request, "edu-groups");
         }
 
-
+        /// <summary>
+        /// Список классов в школе
+        /// </summary>
+        /// <param name="schoolId">schoolId школы</param>
+        /// <returns></returns>
         public string GetSchoolGroups(long schoolId) => Get(new RestRequest(), $"schools/{schoolId}/edu-groups");
 
-
+        /// <summary>
+        /// Учебные группы персоны
+        /// </summary>
+        /// <param name="personId">personId персоны</param>
+        /// <returns></returns>
         public string GetPersonGroups(long personId) => Get(new RestRequest(), $"persons/{personId}/edu-groups");
 
-
+        /// <summary>
+        /// Все учебные группы персоны
+        /// </summary>
+        /// <param name="personId">personId персоны</param>
+        /// <returns></returns>
         public string GetPersonGroupsAll(long personId) => Get(new RestRequest(), $"persons/{personId}/edu-groups/all");
 
-
+        /// <summary>
+        /// Учебные группы персоны в школе
+        /// </summary>
+        /// <param name="personId">personId персоны</param>
+        /// <param name="schoolId">schoolId школы</param>
+        /// <returns></returns>
         public string GetPersonSchoolGroups(long personId, int schoolId) => Get(new RestRequest(), $"persons/{personId}/schools/{schoolId}/edu-groups");
 
 
@@ -672,7 +741,12 @@ namespace ApiDiaryLibrary
         }
 
 
-        public string GetStudentsGroupsList() => Get(new RestRequest(), $"edu-groups/students");
+        public string GetStudentsGroupsList(params long[] groupsIds)// => Get(new RestRequest(), $"edu-groups/students");
+        {
+            var request = new RestRequest();
+            request.AddParameter("groups", Mass2String(groupsIds));
+            return Get(request, $"edu-groups/students");
+        }
 
 
         public string GetUserGroups(long userId) => Get(new RestRequest(), $"users/{userId}/groups");
