@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace ApiDiaryLibrary
 {
+    /// <summary>
+    /// Библиотека для работы с api dnevnik.ru
+    /// </summary>
     public class ApiDiary
     {
         /// <summary>
@@ -80,10 +83,20 @@ namespace ApiDiaryLibrary
             CheckConnection(content);
         }
 
+        /// <summary>
+        /// Ключ-доступ к api
+        /// </summary>
         private string keyAccess;
 
+        /// <summary>
+        /// Ссылка на api dnevnik.ru
+        /// </summary>
         private const string apiUrl = "https://api.dnevnik.ru/v2.0/";
 
+        /// <summary>
+        /// Вернуть текущий токен от сессии
+        /// </summary>
+        /// <returns></returns>
         public string GetAccessToken() => keyAccess;
 
         private IRestResponse Get<type>(RestRequest request, string url)
@@ -220,28 +233,28 @@ namespace ApiDiaryLibrary
         /// <summary>
         /// Получение контекстной информации по пользователю(userId)
         /// </summary>
-        /// <param name="userId">userId персоны</param>
+        /// <param name="userId">id польвзователя</param>
         /// <returns></returns>
         public string GetUserContext(long userId) => Get(new RestRequest(), $"users/{userId}/context");
 
         /// <summary>
         /// Список участий в школах для текущего пользователя
         /// </summary>
-        /// <param name="userId">userId персоны</param>
+        /// <param name="userId">id польвзователя</param>
         /// <returns></returns>
         public string GetUserMemberShips(long userId) => Get(new RestRequest(), $"users/{userId}/school-memberships");
 
         /// <summary>
         /// Список участий в школах для произвольного пользователя
         /// </summary>
-        /// <param name="userId">userId персоны</param>
+        /// <param name="userId">id польвзователя</param>
         /// <returns></returns>
         public string GetUserEducation(long userId) => Get(new RestRequest(), $"users/{userId}/education");
 
         /// <summary>
         /// Список участий в школах для произвольного пользователя
         /// </summary>
-        /// <param name="personId">personId персоны</param>
+        /// <param name="personId">id персоны</param>
         /// <returns></returns>
         public string GetPersonMemberships(long personId) => Get(new RestRequest(), $"users/{personId}/education");
 
@@ -254,7 +267,7 @@ namespace ApiDiaryLibrary
         /// <summary>
         /// Список идентификаторов(schoolIds) школ произвольного пользователя
         /// </summary>
-        /// <param name="userId">userId персоны</param>
+        /// <param name="userId">id пользователя</param>
         /// <returns></returns>
         public string GetUserSchools(long userId) => Get(new RestRequest(), $"users/{userId}/schools");
 
@@ -267,7 +280,7 @@ namespace ApiDiaryLibrary
         /// <summary>
         /// Список идентификаторов(groupIds) классов текущего пользователя
         /// </summary>
-        /// <param name="userId">userId персоны</param>
+        /// <param name="userId">id пользователя</param>
         /// <returns></returns>
         public string GetUserEduGroups(long userId) => Get(new RestRequest(), $"users/{userId}/edu-groups");
 
@@ -280,14 +293,14 @@ namespace ApiDiaryLibrary
         /// <summary>
         /// Класс или учебная группа
         /// </summary>
-        /// <param name="eduGroupId">eduGroupId или groupId персоны</param>
+        /// <param name="eduGroupId">id группы</param>
         /// <returns></returns>
         public string GetGroupInfo(long eduGroupId) => Get(new RestRequest(), $"edu-groups/{eduGroupId}");
 
         /// <summary>
         /// Список учебных групп
         /// </summary>
-        /// <param name="eduGroupsList"></param>
+        /// <param name="eduGroupsList">Список id групп</param>
         /// <returns></returns>
         public string GetGroupsInfo(params long[] eduGroupsList)
         {
@@ -299,29 +312,29 @@ namespace ApiDiaryLibrary
         /// <summary>
         /// Список классов в школе
         /// </summary>
-        /// <param name="schoolId">schoolId школы</param>
+        /// <param name="schoolId">id школы</param>
         /// <returns></returns>
         public string GetSchoolGroups(long schoolId) => Get(new RestRequest(), $"schools/{schoolId}/edu-groups");
 
         /// <summary>
         /// Учебные группы персоны
         /// </summary>
-        /// <param name="personId">personId персоны</param>
+        /// <param name="personId">id персоны</param>
         /// <returns></returns>
         public string GetPersonGroups(long personId) => Get(new RestRequest(), $"persons/{personId}/edu-groups");
 
         /// <summary>
         /// Все учебные группы персоны
         /// </summary>
-        /// <param name="personId">personId персоны</param>
+        /// <param name="personId">id персоны</param>
         /// <returns></returns>
         public string GetPersonGroupsAll(long personId) => Get(new RestRequest(), $"persons/{personId}/edu-groups/all");
 
         /// <summary>
         /// Учебные группы персоны в школе
         /// </summary>
-        /// <param name="personId">personId персоны</param>
-        /// <param name="schoolId">schoolId школы</param>
+        /// <param name="personId">id персоны</param>
+        /// <param name="schoolId">id школы</param>
         /// <returns></returns>
         public string GetPersonSchoolGroups(long personId, int schoolId) => Get(new RestRequest(), $"persons/{personId}/schools/{schoolId}/edu-groups");
 
@@ -331,37 +344,91 @@ namespace ApiDiaryLibrary
 
         public string GetGroupsParallel(long groupId) => Get(new RestRequest(), $"edu-groups/{groupId}/parallel");
 
-
+        /// <summary>
+        /// Получить финальные оценки учеников из группы
+        /// </summary>
+        /// <param name="groupId">id группы</param>
+        /// <returns></returns>
         public string GetGroupMarks(long groupId) => Get(new RestRequest(), $"edu-groups/{groupId}/final-marks");
 
-
+        /// <summary>
+        /// Оценки персоны в учебной группе за период
+        /// </summary>
+        /// <param name="personId">id персоны</param>
+        /// <param name="groupId"><id группы/param>
+        /// <param name="startTime">Начало периода</param>
+        /// <param name="endTime">Конец периода</param>
+        /// <returns></returns>
         public string GetPersonGroupMarks(long personId, long groupId, DateTime startTime, DateTime endTime) => Get(new RestRequest(), $"persons/{personId}/edu-groups/{groupId}/marks/{startTime.ToUniversalTime().ToString("o")}/{endTime.ToUniversalTime().ToString("o")}");
 
-
+        /// <summary>
+        /// Оценки персоны в учебной группе за период
+        /// </summary>
+        /// <param name="personId">id персоны</param>
+        /// <param name="groupId">id группы</param>
+        /// <returns></returns>
         public string GetPersonGroupMarks(long personId, long groupId) => Get(new RestRequest(), $"persons/{personId}/edu-groups/{groupId}/marks/{DateTime.UtcNow.ToUniversalTime().ToString("o")}/{DateTime.UtcNow.ToUniversalTime().ToString("o")}");
 
-
+        /// <summary>
+        /// Итоговые оценки персоны в группе
+        /// </summary>
+        /// <param name="personId">id персоны</param>
+        /// <param name="groupId">id группы</param>
+        /// <returns></returns>
         public string GetPersonGroupMarksFinal(long personId, long groupId) => Get(new RestRequest(), $"persons/{personId}/edu-groups/{groupId}/final-marks");
 
-
+        /// <summary>
+        /// Итоговые оценки персоны в учебной группе
+        /// </summary>
+        /// <param name="personId">id персоны</param>
+        /// <param name="groupId">id группы</param>
+        /// <returns></returns>
         public string GetPersonGroupMarksAllFinal(long personId, long groupId) => Get(new RestRequest(), $"persons/{personId}/edu-groups/{groupId}/allfinalmarks");
 
-
+        /// <summary>
+        /// Получить уроки по предметам
+        /// </summary>
+        /// <param name="groupId">id группы</param>
+        /// <param name="subjectId">id предмета</param>
+        /// <param name="startTime">Начало периода</param>
+        /// <param name="endTime">Конец периода</param>
+        /// <returns>json строка</returns>
         public string GetLessonsSubject(long groupId, long subjectId, DateTime startTime, DateTime endTime) => Get(new RestRequest(), $"edu-groups/{groupId}/subjects/{subjectId}/lessons/{startTime.ToUniversalTime().ToString("o")}/{endTime.ToUniversalTime().ToString("o")}");
 
-
+        /// <summary>
+        /// Получить уроки по предметам
+        /// </summary>
+        /// <param name="groupId">id группы</param>
+        /// <param name="subjectId">id предмета</param>
+        /// <returns></returns>
         public string GetLessonsSubject(long groupId, long subjectId) => Get(new RestRequest(), $"edu-groups/{groupId}/subjects/{subjectId}/lessons/{DateTime.UtcNow.ToUniversalTime().ToString("o")}/{DateTime.UtcNow.ToUniversalTime().ToString("o")}");
 
-
+        /// <summary>
+        /// Получить итоговые оценки по предмету в группе
+        /// </summary>
+        /// <param name="groupId">id группы</param>
+        /// <param name="subjectId">id предмета</param>
+        /// <returns></returns>
         public string GetGroupSubjectFinalMarks(long groupId, long subjectId) => Get(new RestRequest(), $"edu-groups/{groupId}/subjects/{subjectId}/final-marks");
 
-
+        /// <summary>
+        /// Получить список друзей персоны
+        /// </summary>
+        /// <returns></returns>
         public string GetFriends() => Get(new RestRequest(), $"users/me/friends");
 
-
+        /// <summary>
+        /// Получить список друзей персоны
+        /// </summary>
+        /// <param name="userId">id пользователя</param>
+        /// <returns></returns>
         public string GetUserFriends(long userId) => Get(new RestRequest(), $"users/{userId}/friends");
 
-
+        /// <summary>
+        /// Получить домашние задания пользователя текущие
+        /// </summary>
+        /// <param name="schoolId">id школы</param>
+        /// <returns></returns>
         public string GetSchoolHomework(long schoolId)
         {
             var request = new RestRequest();
@@ -370,7 +437,13 @@ namespace ApiDiaryLibrary
             return Get(request, $"users/me/school/{schoolId}/homeworks");
         }
 
-
+        /// <summary>
+        /// Получить домашние задания пользователя по времени
+        /// </summary>
+        /// <param name="schoolId">id школы</param>
+        /// <param name="startTime">Начало периода</param>
+        /// <param name="endTime">Конец периода</param>
+        /// <returns></returns>
         public string GetSchoolHomework(long schoolId, DateTime startTime, DateTime endTime)
         {
             var request = new RestRequest();
@@ -379,7 +452,11 @@ namespace ApiDiaryLibrary
             return Get(request, $"users/me/school/{schoolId}/homeworks");
         }
 
-
+        /// <summary>
+        /// Получить домашнюю работу по id
+        /// </summary>
+        /// <param name="homeworkId">id домашней работы</param>
+        /// <returns></returns>
         public string GetHomeworkById(params long[] homeworkId)
         {
             var request = new RestRequest();
@@ -387,7 +464,14 @@ namespace ApiDiaryLibrary
             return Get(request, "users/me/school/homeworks");
         }
 
-
+        /// <summary>
+        /// Получить домашние задания персоны
+        /// </summary>
+        /// <param name="schoolId">id школы</param>
+        /// <param name="personId">id персоны</param>
+        /// <param name="startTime">Начало периода</param>
+        /// <param name="endTime">Конец периода</param>
+        /// <returns></returns>
         public string GetPersonHomework(long schoolId, long personId, DateTime startTime, DateTime endTime)
         {
             var request = new RestRequest();
@@ -396,7 +480,12 @@ namespace ApiDiaryLibrary
             return Get(request, $"persons/{personId}/school/{schoolId}/homeworks");
         }
 
-
+        /// <summary>
+        /// Получить домашние задания персоны
+        /// </summary>
+        /// <param name="schoolId">id школы</param>
+        /// <param name="personId">id персоны</param>
+        /// <returns></returns>
         public string GetPersonHomework(long schoolId, long personId)
         {
             var request = new RestRequest();
@@ -405,7 +494,12 @@ namespace ApiDiaryLibrary
             return Get(request, $"persons/{personId}/school/{schoolId}/homeworks");
         }
 
-
+        /// <summary>
+        /// Удалить отметку о посещаемости
+        /// </summary>
+        /// <param name="lessonId">id урока</param>
+        /// <param name="personId">id персоны</param>
+        /// <returns></returns>
         public string DeleteLessonLog(long lessonId, long personId)
         {
             var request = new RestRequest();
@@ -454,18 +548,34 @@ namespace ApiDiaryLibrary
         )
         */
 
-
+        /// <summary>
+        /// Список отметок о посещаемости на нескольких уроках
+        /// </summary>
+        /// <param name="lessonsIds">id уроков</param>
+        /// <returns></returns>
         public string GetLessonLogs(params long[] lessonsIds)
         {
             var request = new RestRequest();
             request.AddParameter("lessons", Mass2String(lessonsIds));
-            return Delete(request, $"lesson-log-entries");
+            return Get(request, $"lesson-log-entries");
         }
 
-
+        /// <summary>
+        /// Отметка о посещаемости ученика на уроке
+        /// </summary>
+        /// <param name="personId">id персоны</param>
+        /// <param name="lessonId">id урока</param>
+        /// <returns></returns>
         public string GetPersonLessonLog(long personId, long lessonId) => Get(new RestRequest(), $"lesson-log-entries/lesson/{lessonId}/person/{personId}");
 
-
+        /// <summary>
+        /// Список отметок о посещаемости на уроках по заданному предмету в классе за интервал времени
+        /// </summary>
+        /// <param name="groupId">id группы</param>
+        /// <param name="subjectId">id предмета</param>
+        /// <param name="startTime">Начало периода</param>
+        /// <param name="endTime">Конец периода</param>
+        /// <returns></returns>
         public string GetGroupLessonLog(long groupId, long subjectId, DateTime startTime, DateTime endTime)
         {
             var request = new RestRequest();
@@ -475,7 +585,12 @@ namespace ApiDiaryLibrary
             return Get(request, $"lesson-log-entries/group/{groupId}");
         }
 
-
+        /// <summary>
+        /// Список отметок о посещаемости на уроках по заданному предмету в классе в текущее время
+        /// </summary>
+        /// <param name="groupId">id группы</param>
+        /// <param name="subjectId">id предмета</param>
+        /// <returns></returns>
         public string GetGroupLessonLog(long groupId, long subjectId)
         {
             var request = new RestRequest();
@@ -485,17 +600,22 @@ namespace ApiDiaryLibrary
             return Get(request, $"lesson-log-entries/group/{groupId}");
         }
 
+        /// <summary>
+        /// Список отметок о посещаемости обучающегося по предмету за интервал времени
+        /// </summary>
+        /// <param name="personId">id персоны</param>
+        /// <param name="subjectId">id предмета</param>
+        /// <param name="startTime">Начало периода</param>
+        /// <param name="endTime">Конец периода</param>
+        /// <returns></returns>
+        public string GetPersonSubjectLessonLog(long personId, long subjectId, DateTime startTime, DateTime endTime) => Get(new RestRequest(), $"lesson-log-entries/person={personId}&subject={subjectId}&from={startTime.ToUniversalTime().ToString("o")}&to={endTime.ToUniversalTime().ToString("o")}");
 
-        public string GetPersonSubjectLessonLog(long personId, long subjectId, DateTime startTime, DateTime endTime)
-        {
-            var request = new RestRequest();
-            request.AddParameter("subject", subjectId);
-            request.AddParameter("from", startTime.ToUniversalTime().ToString("o"));
-            request.AddParameter("to", endTime.ToUniversalTime().ToString("o"));
-            return Get(request, $"lesson-log-entries/person/{personId}/subject/{subjectId}");
-        }
-
-
+        /// <summary>
+        /// Список отметок о посещаемости обучающегося по предмету за интервал времени
+        /// </summary>
+        /// <param name="personId">id персоны</param>
+        /// <param name="subjectId">id предмета</param>
+        /// <returns></returns>
         public string GetPersonSubjectLessonLog(long personId, long subjectId)
         {
             var request = new RestRequest();
@@ -505,7 +625,13 @@ namespace ApiDiaryLibrary
             return Get(request, $"lesson-log-entries/person/{personId}/subject/{subjectId}");
         }
 
-
+        /// <summary>
+        /// Список отметок о посещаемости обучающегося за интервал времени
+        /// </summary>
+        /// <param name="personId">id персоны</param>
+        /// <param name="startTime">Начало периода</param>
+        /// <param name="endTime">Конец периода</param>
+        /// <returns></returns>
         public string GetPersonLessonLogs(long personId, DateTime startTime, DateTime endTime)
         {
             var request = new RestRequest();
@@ -514,7 +640,11 @@ namespace ApiDiaryLibrary
             return Get(request, $"persons/{personId}/lesson-log-entries");
         }
 
-
+        /// <summary>
+        /// Список отметок о посещаемости обучающегося в текущее время
+        /// </summary>
+        /// <param name="personId">id персоны</param>
+        /// <returns></returns>
         public string GetPersonLessonLogs(long personId)
         {
             var request = new RestRequest();
@@ -523,13 +653,24 @@ namespace ApiDiaryLibrary
             return Get(request, $"persons/{personId}/lesson-log-entries");
         }
 
-
+        /// <summary>
+        /// Получить список возможных отметок о посещаемости
+        /// </summary>
+        /// <returns></returns>
         public string GetLessonLogStatuses() => Get(new RestRequest(), $"lesson-log-entries/statuses");
 
-
+        /// <summary>
+        /// Получить урок с заданным id
+        /// </summary>
+        /// <param name="lessonId">id урока</param>
+        /// <returns></returns>
         public string GetLessonInfo(long lessonId) => Get(new RestRequest(), $"lessons/{lessonId}");
 
-
+        /// <summary>
+        /// Получить уроки с заданным id
+        /// </summary>
+        /// <param name="lessonsList">id уроков</param>
+        /// <returns></returns>
         public string GetManyLessonsInfo(params long[] lessonsList)// Get(new RestRequest(), $"lessons/many");
         {
             var request = new RestRequest();
